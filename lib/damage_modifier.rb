@@ -1,32 +1,26 @@
 module DamageModifier
 
-  def make
-    @modifiers = {
-      Footman => {
-        Barracks => 0.5
-      },
-      SiegeEngine => {
-        SiegeEngine => 1,
-        Unit => 0,
-        Barracks => 2
-      },
-      Unit => {
-        Unit => 1
-      }
+  Modifiers = {
+    Footman: {
+      Barracks: 0.5
+    },
+    SiegeEngine: {
+      SiegeEngine: 1,
+      Unit: 0,
+      Barracks: 2
     }
-  end
+  }
 
-  def get_damage_modifier(attacker,attacked)
-    make if @modifiers.nil? #Total hack...
+  def get_damage_modifier(attacker,enemy)
+    attacker_key = attacker.class.to_s.to_sym
+    enemy_key = enemy.class.to_s.to_sym
 
-    @modifiers.each do |attack_class,modifier_hash|
-      if attacker.is_a? attack_class
-        modifier_hash.each do |attacked_class,modifier|
-          if attacked.is_a? attacked_class
-            return modifier
-          end
-        end
-      end
+    enemy_hash = Modifiers[attacker_key]
+
+    if enemy_hash && enemy_hash.include?(enemy_key)
+      enemy_hash[enemy_key]
+    else
+      1
     end
   end
 
