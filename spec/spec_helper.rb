@@ -1,7 +1,7 @@
 # Helper file to setup our tests/specs for this program.
 # NO NEED TO EDIT
 
-require 'pry'
+require 'byebug'
 require 'rspec'
 
 def safely_require(file)
@@ -10,7 +10,10 @@ rescue LoadError
   # ignore
 end
 
+safely_require '../lib/health_mixin'
+safely_require '../lib/damage_modifier'
 safely_require '../lib/unit'
 safely_require '../lib/footman'
 safely_require '../lib/barracks'
 safely_require '../lib/peasant'
+safely_require '../lib/siege_engine'
