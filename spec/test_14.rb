@@ -21,7 +21,7 @@ describe SiegeEngine do
   describe '#attack' do
 
     before :each do
-      @unit = Unit.new(10,10)
+      @unit = Footman.new
       @siege_enemy = SiegeEngine.new
       @barracks = Barracks.new
     end
